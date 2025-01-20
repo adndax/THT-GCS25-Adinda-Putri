@@ -1,0 +1,52 @@
+#root {
+  max-width: 80em;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+h1 {
+  margin: 0 0 0 0;
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+p {
+  font-style: italic;
+}
+
+.slogan {
+  margin: 0 0 1.5em 0;
+  color: rgb(200,200,200);
+}
+
+.empty-task {
+  color: rgb(90,90,90);
+  margin: 1.5em 0 0 0;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+  background-color: #f8f9fa;
+  border-radius: 0.625em;
+  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.1);
+}
