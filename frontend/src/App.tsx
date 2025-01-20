@@ -5,9 +5,10 @@ import "./App.css";
 import TodoForm from "./TodoForm";
 
 interface Todo {
-  id: number; // Ubah dari string menjadi number
+  id: number; 
   name: string;
   description: string;
+  created_at: string;
 }
 
 function App() {

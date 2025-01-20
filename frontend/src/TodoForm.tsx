@@ -5,6 +5,7 @@ interface Todo {
   id: number;
   name: string;
   description: string;
+  created_at: string;
 }
 
 interface TodoFormProps {
@@ -65,6 +66,7 @@ const TodoForm: React.FC<TodoFormProps> = ({
             <tr>
               <th>Name</th>
               <th>Description</th>
+              <th>Created At</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -73,6 +75,7 @@ const TodoForm: React.FC<TodoFormProps> = ({
               <tr key={todo.id}>
                 <td>{todo.name}</td>
                 <td>{todo.description}</td>
+                <td>{new Date(todo.created_at).toLocaleString()}</td>
                 <td>
                   <button
                     onClick={() => onDeleteTodo(todo.id)} // Sesuaikan tipe id
