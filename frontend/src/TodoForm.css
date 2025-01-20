@@ -38,7 +38,7 @@ input {
 }
 
 .button-delete {
-    background-color: #dc3545;
+    background-color: #c60d20;
     color: white;
     border: none;
     padding: 0.313em 0.625em;
@@ -47,7 +47,7 @@ input {
 }
   
 .button-delete:hover {
-    background-color: #c82333;
+    background-color: #a8121e;
 }
   
 table {
@@ -58,9 +58,11 @@ table {
   
 table th,
 table td {
-    border: 0.063em solid #ddd;
+    border: 0.07em solid #ddd;
     padding: 0.5em;
     text-align: center;
+    color: black;
+    font-size: 13px;
 }
   
 table th {
