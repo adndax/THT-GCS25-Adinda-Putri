@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import './TodoForm.css';
+import "./TodoForm.css";
 
 interface Todo {
-  id: string;
+  id: number;
   name: string;
   description: string;
 }
@@ -10,7 +10,7 @@ interface Todo {
 interface TodoFormProps {
   todos: Todo[];
   onAddTodo: (newTodo: { name: string; description: string }) => void;
-  onDeleteTodo: (id: string) => void;
+  onDeleteTodo: (id: number) => void;
 }
 
 const TodoForm: React.FC<TodoFormProps> = ({
@@ -47,10 +47,11 @@ const TodoForm: React.FC<TodoFormProps> = ({
           onChange={(e) => setDescription(e.target.value)}
           required
         />
-        <button 
-            type="submit" 
-            className="button"
-            disabled={!name || !description}>
+        <button
+          type="submit"
+          className="button"
+          disabled={!name || !description}
+        >
           Add Task
         </button>
       </form>
@@ -62,7 +63,6 @@ const TodoForm: React.FC<TodoFormProps> = ({
         <table>
           <thead>
             <tr>
-              <th>ID</th>
               <th>Name</th>
               <th>Description</th>
               <th>Actions</th>
@@ -71,12 +71,11 @@ const TodoForm: React.FC<TodoFormProps> = ({
           <tbody>
             {todos.map((todo) => (
               <tr key={todo.id}>
-                <td>{todo.id}</td>
                 <td>{todo.name}</td>
                 <td>{todo.description}</td>
                 <td>
                   <button
-                    onClick={() => onDeleteTodo(todo.id)}
+                    onClick={() => onDeleteTodo(todo.id)} // Sesuaikan tipe id
                     className="button-delete"
                   >
                     Delete
