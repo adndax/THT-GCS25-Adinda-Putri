@@ -5,7 +5,7 @@ import "./App.css";
 import TodoForm from "./TodoForm";
 
 interface Todo {
-  id: string;
+  id: number; // Ubah dari string menjadi number
   name: string;
   description: string;
 }
@@ -13,27 +13,30 @@ interface Todo {
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  // Fetch tasks from backend
   useEffect(() => {
     axios
-      .get<Todo[]>("http://localhost:5000/items")
-      .then((response) => setTodos(response.data))
-      .catch((error) => console.error("Error fetching tasks:", error));
+      .get("http://localhost:8000/task/")
+      .then((response) => setTodos(response.data.result)) // result berisi array task
+      .catch((error) => console.error(error));
   }, []);
 
-  // Add new task
   const handleAddTask = (newTodo: { name: string; description: string }) => {
     axios
-      .post<Todo>("http://localhost:5000/items", newTodo)
-      .then((response) => setTodos([...todos, response.data]))
-      .catch((error) => console.error("Error adding task:", error));
+      .post("http://localhost:8000/task/create", {
+        parameter: newTodo, // Bungkus newTodo dalam parameter
+      })
+      .then((response) => {
+        setTodos([...todos, response.data.result]); // Tambahkan task ke state
+      })
+      .catch((error) => console.error("Error adding task:", error.response));
   };
 
-  // Delete task by ID
-  const handleDeleteTask = (id: string) => {
+  const handleDeleteTask = (id: number) => {
     axios
-      .delete(`http://localhost:5000/items/${id}`)
-      .then(() => setTodos(todos.filter((todo) => todo.id !== id)))
+      .delete(`http://localhost:8000/task/${id}`)
+      .then(() => {
+        setTodos(todos.filter((todo) => todo.id !== id)); // Hapus dari state
+      })
       .catch((error) => console.error("Error deleting task:", error));
   };
 
@@ -45,11 +48,8 @@ function App() {
         </a>
       </div>
       <h1>AksanTask</h1>
-      <p className="slogan">
-        Organize your tasks, reach for the sky!
-      </p>
+      <p className="slogan">Organize your tasks, reach for the sky!</p>
       <div className="card">
-        {/* Pass all handlers and data to TodoForm */}
         <TodoForm
           todos={todos}
           onAddTodo={handleAddTask}
